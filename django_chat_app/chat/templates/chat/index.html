@@ -5,8 +5,8 @@
 <style>
     .page-content {
         display: flex;
-        justify-content: flex-start;
-        flex-direction: column-reverse;
+        justify-content: space-evenly;
+        flex-direction: column;
         align-items: center;
         height: 95vh;
     }
@@ -25,17 +25,41 @@
     .mdl-textfield {
         width: 90%;
     }
+
+    .messages-div{
+        height: 80vh;
+        width: 80vw;
+        overflow: scroll;
+    }
+
+    .messages-div::-webkit-scrollbar {
+        display: none;
+    }
+
+    .message-div{
+        display: flex;
+        align-items: center;
+        height: 5vh;
+        
+    }
+
+    hr{
+        width: 80%;
+        margin: auto;
+    }
 </style>
 
 <!-- Always shows a header, even in smaller screens. -->
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
     <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
-            <!-- Title -->
-            <span class="mdl-layout-title">Welcome, {{ request.user.first_name }}</span>
-            <!-- Add spacer, to align navigation to the right -->
+            {% if request.user.is_authenticated %}
+            <span>Welcome, {{ request.user.first_name }}</span>
+            {% else %}
+            <span>Wilkommen, Bitte loge dich ein</span>
+            {% endif %}
             <div class="mdl-layout-spacer"></div>
-            <!-- Navigation. We hide it in small screens. -->
+            
             <nav class="mdl-navigation mdl-layout--large-screen-only">
                 <a class="mdl-navigation__link" href="">Link</a>
                 <a class="mdl-navigation__link" href="">Link</a>
@@ -53,11 +77,24 @@
             <a class="mdl-navigation__link" href="">Link</a>
         </nav>
     </div>
+{% if request.user.is_authenticated %}
     <main class="mdl-layout__content">
+
         <div class="page-content">
-            <form action="#">
+            <div class="messages-div">
+                {% for message in messages%}
+                <div class="message-div">
+                    <img src="assets/user.png">
+                    <b>{{ message.author }}:</b> <i>{{ message.textmessage }}</i>
+                </div>
+                <hr>
+                {% endfor %}
+            </div>
+            
+            <form action="/chat/" method="post">
+                {% csrf_token %}
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="text" id="sample3">
+                    <input class="mdl-textfield__input" name="textmessage" type="text" id="sample3">
                     <label class="mdl-textfield__label" for="sample3">Text...</label>
                 </div>
 
@@ -65,6 +102,10 @@
                     Send
                 </button>
             </form>
+            {% else %}
+            <h1>Du bist nicht eingeloggt</h1>
+            <p>Bitte loge dich ein. Klicke hier <a href="/login" target="_blank">Login</a></p>
+            {% endif %}
         </div>
     </main>
 </div>
