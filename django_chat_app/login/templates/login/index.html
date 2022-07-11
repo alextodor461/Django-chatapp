@@ -4,24 +4,27 @@
 <link rel="stylesheet" href="{% static 'css/login.css' %}">
 <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 
-<h1>Login</h1>
-{% if wrongData %}
-<p>Password or username are wrong</p>
-{% endif %}
-<form action="/login/" method="post">
 
-    {% csrf_token %}
-    <input type="hidden" value="{{redirect}}" name="redirect">
-    <div class="username-div">
-        <label for="username">Username</label>
-        <input name="username" type="text">
-    </div>
+<main>
+    <form action="/login/" method="post">
+        {% csrf_token %}
+        <div class="input-div">
+            <input type="hidden" value="{{redirect}}" name="redirect">    
+            <!--<label for="username">Username</label>-->
+            <input name="username" type="text" placeholder="Enter your username">
+        
+            <!--<label for="password">Password</label>-->
+            <input name="password" type="password" placeholder="Enter your password">
+        <button>Login</button>
+        <a href="/register">Registriere dich hier</a>
+        {% if wrongData %}
+            <p>Password or username are wrong</p>
+        {% endif %}
+        </div>
+        
 
-    <div class="passwort-div">
-        <label for="password">Password</label>
-        <input name="password" type="password">
-    </div>
-
-    <button>Login</button>
-    <a href="/register">Neu hier?</a>
-</form>
+        <div class="side-div">
+            <h2>Login</h2>
+        </div>
+    </form>
+</main>

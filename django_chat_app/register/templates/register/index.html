@@ -1,13 +1,21 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/register.css' %}">
 <main>
     <form action="/register/" method="post">
         {% csrf_token %}
-        <input type="text" name="firstname" placeholder="Enter your Firtsname">
+        <div class="input-div">
+            <input type="text" name="firstname" placeholder="Enter your Firtsname">
+            <input type="text" name="username" placeholder="Enter a username">
+            <input type="password" name="password" placeholder="Enter a password">
+            <input type="email" name="email" placeholder="Enter your email">
+            <button>register</button>
+        </div>
 
-        <input type="text" name="username" placeholder="Enter a username">
-        <input type="password" name="password" placeholder="Enter a password">
-        <input type="email" name="email" placeholder="Enter your email">
-        <button>register</button>
+        <div class="side-div">
+            <h2>Register</h2>
+        </div>
+        
     </form>
 </main>
