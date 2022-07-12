@@ -4,22 +4,36 @@
 
 main {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     flex-direction: column;
     align-items: center;
     height: 100vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), url('/static/img/social-media-3758364.jpg');
+        background-position: center;
+        background-size: cover;
+    }
+    
+    h1 {
+        color: white;
+        margin-top: -200px;
+    }
+    
+    h3 {
+        color: white;
 }
 
 form {
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
     align-items: center;
-    box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.201);
-    border-radius: 20px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.668);
     width: 60vw;
     height: 50vh;
     position: relative;
     overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.601);
+        border-radius: 20px;
 }
 
 form button {
@@ -31,7 +45,12 @@ form button {
     border-radius: 50px;
     cursor: pointer;
     box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.2);
-    background: none;
+    background-color: #ED553B;
+        color: white;
+    }
+    
+    form button:hover {
+        background-color: #fa4323;
 }
 
 .input-div{
@@ -40,8 +59,13 @@ form button {
     flex-direction: column;
     align-items: center;
     flex: 1;
+    width: 100%;
 }
 
+::placeholder {
+    color: white;
+    opacity: 1;
+}
 .side-div{
     display: flex;
     justify-content: flex-start;
@@ -56,9 +80,10 @@ form button {
 input {
     height: 40px;
     width: 50%;
-    margin: 10px 0px;
+    margin: 20px 0px;
     padding: 0px 10px;
     border: none;
-    border-radius: 50px;
-    box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.201);
+    background: transparent;
+        border-bottom: 2px solid #ED553B;
+        color: white;
 }
