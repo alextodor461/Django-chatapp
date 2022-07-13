@@ -18,12 +18,13 @@ from django.urls import path
 from chat.views import index, logout_view
 from login.views import index2
 from register.views import registerUser
-
+from userprofile.views import show
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('chat/', index),
     path('login/', index2),
     path('register/', registerUser),
-    path('logout_view', logout_view)
+    path('logout_view/', logout_view),
+    path('user_profile/', show),
 ]

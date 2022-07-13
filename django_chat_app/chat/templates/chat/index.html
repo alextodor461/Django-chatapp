@@ -40,7 +40,12 @@
         display: flex;
         align-items: center;
         height: 7.5vh;
-        
+        background-color: rgb(63,81,181);
+        color: white;
+        padding: 0px 20px;
+        max-width: 400px;
+        border-radius: 7.5px;
+        width: fit-content;
     }
 
     hr{
@@ -60,6 +65,16 @@
         display: flex;
         align-items: center;
     }
+
+    .profile-message-div{
+        display: flex;
+        flex-direction: column;
+        margin: 15px 0px;
+    }
+
+    .margin-left{
+        margin-left: 10px;
+    }
 </style>
 
 <script>
@@ -76,10 +91,15 @@
         fd.append('csrfmiddlewaretoken', token);
         try {
             messageDiv.innerHTML += `
-            <div class="html-div color-gray" id="removeMessage">
-                <img class="user-img" src="/static/img/user.png">
-                <span>[${newdate}]</span><b>{{ request.user }}:</b> <i>${ message.value }</i>
-            </div>`;
+            <div class="profile-message-div color-gray" id="removeMessage">
+                    <div>  
+                        <b>{{ request.user }}</b> <span class="color-gray margin-left">${ newdate }</span>
+                    </div>
+                    
+                    <div class="message-div">        
+                        <i>${ message.value }</i>
+                    </div>
+                </div>     `;
             await fetch('/chat/', {
                 method: 'POST',
                 body: fd
@@ -88,10 +108,15 @@
             document.getElementById('removeMessage').remove();
 
             messageDiv.innerHTML += `
-            <div class="html-div">
-                <img class="user-img" src="/static/img/user.png">
-                <span>[${newdate}]</span><b>{{ request.user }}:</b> <i>${ message.value }</i>
-            </div>`;
+            <div class="profile-message-div">
+                    <div>  
+                        <b>{{ request.user }}</b> <span class="color-gray margin-left">${ newdate }</span>
+                    </div>
+                    
+                    <div class="message-div">        
+                        <i>${ message.value }</i>
+                    </div>
+                </div>     `;
             console.log('success')
         } catch (e) {
             console.log('Not successfully', e)
@@ -134,11 +159,16 @@
 
         <div class="page-content">
             <div class="messages-div" id="messageDiv">
-                {% for message in messages%}
-                <div class="message-div">
-                    <img class="user-img" src="/static/img/user.png">
-                    <span>[{{ message.created_at }}]</span><b>{{ message.author }}:</b> <i>{{ message.textmessage }}</i>
-                </div>
+                {% for message in messages%}  
+                <div class="profile-message-div">
+                    <div>  
+                        <b>{{ message.author }}</b> <span class="color-gray margin-left">{{ message.created_at }}</span>
+                    </div>
+                    
+                    <div class="message-div">        
+                        <i>{{ message.textmessage }}</i>
+                    </div>
+                </div>     
                 {% endfor %}
             </div>
             
