@@ -39,7 +39,7 @@
     .message-div{
         display: flex;
         align-items: center;
-        height: 5vh;
+        height: 7.5vh;
         
     }
 
@@ -47,19 +47,51 @@
         width: 80%;
         margin: auto;
     }
+
+    .color-gray{
+        color: gray;
+    }
+
+    .user-img{
+        width: 50px;
+    }
+
+    .html-div{
+        display: flex;
+        align-items: center;
+    }
 </style>
 
 <script>
     async function sendMessage() {
-        let fd = new FormData();
-        let token = '{{ csrf_token }}'
-        fd.append('textmessage', message.value);
+        var dateObj = new Date();
+        var month = dateObj.toLocaleString('en', { month: 'long' }); //months from 1-12
+        var day = dateObj.getUTCDate();
+        var year = dateObj.getUTCFullYear();
+        newdate = month + " " + day + ", " + year;
+
+        let fd = new FormData(); //FormDat object
+        let token = '{{ csrf_token }}' //Token saved in a var
+        fd.append('textmessage', message.value); //
         fd.append('csrfmiddlewaretoken', token);
         try {
+            messageDiv.innerHTML += `
+            <div class="html-div color-gray" id="removeMessage">
+                <img class="user-img" src="/static/img/user.png">
+                <span>[${newdate}]</span><b>{{ request.user }}:</b> <i>${ message.value }</i>
+            </div>`;
             await fetch('/chat/', {
                 method: 'POST',
                 body: fd
             })
+
+            document.getElementById('removeMessage').remove();
+
+            messageDiv.innerHTML += `
+            <div class="html-div">
+                <img class="user-img" src="/static/img/user.png">
+                <span>[${newdate}]</span><b>{{ request.user }}:</b> <i>${ message.value }</i>
+            </div>`;
             console.log('success')
         } catch (e) {
             console.log('Not successfully', e)
@@ -101,13 +133,12 @@
     <main class="mdl-layout__content">
 
         <div class="page-content">
-            <div class="messages-div">
+            <div class="messages-div" id="messageDiv">
                 {% for message in messages%}
                 <div class="message-div">
-                    <img src="assets/user.png">
-                    <b>{{ message.author }}:</b> <i>{{ message.textmessage }}</i>
+                    <img class="user-img" src="/static/img/user.png">
+                    <span>[{{ message.created_at }}]</span><b>{{ message.author }}:</b> <i>{{ message.textmessage }}</i>
                 </div>
-                <hr>
                 {% endfor %}
             </div>
             
