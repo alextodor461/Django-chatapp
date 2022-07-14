@@ -3,4 +3,4 @@ from django.shortcuts import render
 # Create your views here.
 
 def show(request):
-    return render(request, 'userprofile/user.html')
+    return render(request, 'user_profile/index.html')
