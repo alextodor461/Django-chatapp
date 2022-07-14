@@ -1,0 +1,93 @@
+.page-content {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+    height: 94vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.668)), url('/static/img/wallpaperbetter.jpg');
+    background-position: center;
+    background-size: cover;
+    color: white;
+}
+
+.mdl-layout__header-row {
+    height: 5vh;
+}
+
+.mdl-layout__drawer{
+    background-color: rgb(63,81,181);
+    color: white;
+}
+
+.mdl-layout__drawer a{
+    color: white !important;
+}
+
+.mdl-textfield__input{
+    height: 10vh !important;
+    background-color: rgba(255, 255, 255, 0.368);
+    border-radius: 15px;
+    overflow: hidden;
+    padding: 0px 10px;
+}
+
+form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80vw;
+}
+
+.mdl-textfield {
+    width: 90%;
+}
+
+.messages-div{
+    height: 80vh;
+    width: 80vw;
+    overflow: scroll;
+}
+
+.messages-div::-webkit-scrollbar {
+    display: none;
+}
+
+.message-div{
+    display: flex;
+    align-items: center;
+    height: 5vh;
+    background-color: rgb(63,81,181);
+    color: white;
+    padding: 0px 20px;
+    max-width: 400px;
+    border-radius: 7.5px;
+    width: fit-content;
+}
+
+hr{
+    width: 80%;
+    margin: auto;
+}
+
+.color-gray{
+    color: gray;
+}
+
+.user-img{
+    width: 50px;
+}
+
+.html-div{
+    display: flex;
+    align-items: center;
+}
+
+.profile-message-div{
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0px;
+}
+
+.margin-left{
+    margin-left: 10px;
+}
