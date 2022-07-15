@@ -1,22 +1,46 @@
+*{
+    margin: 0;
+    padding: 0;
+    overflow-y: hidden;
+}
+
+main{
+    width: 100vw;
+}
+
 .page-content {
     display: flex;
     justify-content: space-evenly;
     flex-direction: column;
     align-items: center;
-    height: 95vh;
+    height: 92.5vh;
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.668)), url('/static/img/wallpaperbetter.jpg');
     background-position: center;
     background-size: cover;
     color: white;
 }
 
-.mdl-layout__header-row {
-    height: 5vh;
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(63,81,181);
+    height: 7.5vh;
+    padding: 0px 40px;
+    color: white;
+    box-shadow: 5px 0px 15px black;
+    z-index: 10;
 }
 
-.mdl-layout__drawer{
-    background-color: rgb(63,81,181);
+.a-tags{
+    display: flex;
+    align-items: center;
+}
+
+.a-tags a{
     color: white;
+    text-decoration: none;
+    margin-left: 20px;
 }
 
 .mdl-layout__drawer a{
@@ -31,11 +55,11 @@
     padding: 0px 10px;
 }
 
-form {
+.form-input{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 80vw;
+    width: 80vw !important;
 }
 
 .mdl-textfield {

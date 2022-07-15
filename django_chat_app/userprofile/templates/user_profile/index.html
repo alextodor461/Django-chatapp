@@ -1,1 +1,54 @@
-<h1>HIIIIIIIIIIIII</h1>
+{% extends "base.html" %}
+{% block content %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/chat.css' %}">
+    <title>Document</title>
+
+    <main>
+        <div class="background-img">
+
+        </div>
+
+        <div class="div-profile-img">
+            <div  class="profile-img">
+                <img src="/static/img/blank-profile-picture-973460_1280.png" alt="">
+            </div>
+        </div>
+
+        <div class="user-details">
+            <hr>
+
+            <div>
+                <div class="user-firstname-div alig-items">
+                    <span>firstname:</span>
+                    <span>{{ request.user.first_name }}</span>
+                </div>
+    
+                <div class="user-lastname-div alig-items">
+                    <span>lastname:</span>
+                    <span>{{ request.user.last_name }}</span>
+                </div>
+    
+                <div class="user-email-div alig-items">
+                    <span>email:</span>
+                    <span>{{ request.user.email }}</span>
+                </div>
+    
+                <div class="user-username-div alig-items">
+                    <span>username:</span>
+                    <span>{{ request.user.username }}</span>
+                </div>
+    
+            </div>
+        </div>
+
+        <div class="user-lastlogin-div alig-items">
+            <span>Last login:</span>
+            <span>{{ request.user.last_login}}</span>
+        </div>
+    </main>
+{% endblock %}

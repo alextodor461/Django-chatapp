@@ -8,13 +8,27 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
-
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 </head>
 
 <body>
+    <header>
+        {% if request.user.is_authenticated %}
+            <span>Welcome, {{request.user.first_name}}</span>
+        {% else %}
+            <span>Wilkommen, bitte loge dich ein!</span>
+        {% endif %}
+
+        <div class="a-tags">
+            <a href="/chat">Chat</a>
+            <form action="/logout_view">
+                <a href="/logout_view/">Logout</a>
+            </form>
+            <a href="">Link</a>
+            <a class="mdl-navigation__link" href="/user_profile/">Profile</a>
+        </div>
+</header>
     {% block content %}
     {% endblock %}
 </body>
-
 </html>
