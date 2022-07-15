@@ -1,11 +1,15 @@
-*{
+body {
     margin: 0;
     padding: 0;
     overflow-y: hidden;
+    
 }
 
-main{
+.main {
     width: 100vw;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.668)), url('/static/img/wallpaperbetter.jpg');
+        background-position: center;
+        background-size: cover;
 }
 
 .page-content {
@@ -14,9 +18,6 @@ main{
     flex-direction: column;
     align-items: center;
     height: 92.5vh;
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.668)), url('/static/img/wallpaperbetter.jpg');
-    background-position: center;
-    background-size: cover;
     color: white;
 }
 
