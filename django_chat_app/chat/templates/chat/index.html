@@ -1,61 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
 
+<script>
+    let user = '{{ request.user }}';
+</script>
+
 <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css"> -->
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/chat.css' %}">
 <!-- <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></> -->
-    
-
-<script>
-    async function sendMessage() {
-    var dateObj = new Date();
-    var month = dateObj.toLocaleString('en', { month: 'long' }); //months from 1-12
-    var day = dateObj.getUTCDate();
-    var year = dateObj.getUTCFullYear();
-    newdate = month + " " + day + ", " + year;
-
-    let fd = new FormData(); //FormDat object
-    let token = '{{ csrf_token }}' //Token saved in a var
-    fd.append('textmessage', message.value); //
-    fd.append('csrfmiddlewaretoken', token);
-    try {
-        messageDiv.innerHTML += `
-        <div class="profile-message-div color-gray" id="removeMessage">
-                <div>  
-                    <b>{{ request.user }}</b> <span class="color-gray margin-left">${ newdate }</span>
-                </div>
-                
-                <div class="message-div">        
-                    <i>${ message.value }</i>
-                </div>
-            </div>     `;
-        await fetch('/chat/', {
-            method: 'POST',
-            body: fd
-        })
-
-        document.getElementById('removeMessage').remove();
-
-        messageDiv.innerHTML += `
-        <div class="profile-message-div">
-                <div>  
-                    <b>{{ request.user }}</b> <span class="color-gray margin-left">${ newdate }</span>
-                </div>
-                
-                <div class="message-div">        
-                    <i>${ message.value }</i>
-                </div>
-            </div>     `;
-            message.value = '';
-
-        console.log('success')
-    } catch (e) {
-        console.log('Not successfully', e)
-    }
-}
-</script>
+    <script src="{% static 'js/chat.js' %}"></script>
 
 {% if request.user.is_authenticated %}
     <main class="mdl-layout__content main" id="vantaCanvas">
@@ -72,6 +27,12 @@
                         <i>{{ message.textmessage }}</i>
                     </div>
                 </div>     
+                {% endfor %}
+
+                {% for chats in chat%}  
+               <div>
+                    {{ chats.chat_name }}
+               </div>  
                 {% endfor %}
             </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>

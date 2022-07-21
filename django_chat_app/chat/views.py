@@ -24,6 +24,14 @@ def index(request):
     return render(request, 'chat/index.html', {'messages': chat_messages})
     
 
+def newChat(request):
+    if request.method == 'POST':
+        print('Received Data' + request.POST['chat_name'])
+        newChat = Chat.object.create(chat_name=request.POST['chat_name'])
+        chat = Chat.object.filter(chat__id=1)
+    return render(request, 'chat/index.html', {'chats': chat})
+
+
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect('/chat/')

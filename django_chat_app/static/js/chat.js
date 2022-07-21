@@ -1,46 +1,66 @@
-async function sendMessage() {
-    var dateObj = new Date();
-    var month = dateObj.toLocaleString('en', { month: 'long' }); //months from 1-12
-    var day = dateObj.getUTCDate();
-    var year = dateObj.getUTCFullYear();
-    newdate = month + " " + day + ", " + year;
+let token = getCookie("csrftoken"); //Token saved in a variable
 
-    let fd = new FormData(); //FormDat object
-    let token = '{{ csrf_token }}' //Token saved in a var
-    fd.append('textmessage', message.value); //
-    fd.append('csrfmiddlewaretoken', token);
-    try {
-        messageDiv.innerHTML += `
+async function sendMessage() {
+  let dateObj = new Date();
+  let month = dateObj.toLocaleString("en", { month: "long" }); //months from 1-12
+  let day = dateObj.getUTCDate();
+  let year = dateObj.getUTCFullYear();
+  newdate = month + " " + day + ", " + year;
+
+  let fd = new FormData(); //FormDat object
+  fd.append("textmessage", message.value);
+  //fd.append('author', user);
+  fd.append("csrfmiddlewaretoken", token);
+  try {
+    messageDiv.innerHTML += `
         <div class="profile-message-div color-gray" id="removeMessage">
                 <div>  
-                    <b>{{ request.user }}</b> <span class="color-gray margin-left">${ newdate }</span>
+                    <b>${user}</b> <span class="color-gray margin-left">${newdate}</span>
                 </div>
                 
                 <div class="message-div">        
-                    <i>${ message.value }</i>
+                    <i>${message.value}</i>
                 </div>
             </div>     `;
-        await fetch('/chat/', {
-            method: 'POST',
-            body: fd
-        })
+    await fetch("/chat/", {
+      method: "POST",
+      body: fd,
+    });
 
-        document.getElementById('removeMessage').remove();
+    document.getElementById("removeMessage").remove();
 
-        messageDiv.innerHTML += `
+    messageDiv.innerHTML += `
         <div class="profile-message-div">
                 <div>  
-                    <b>{{ request.user }}</b> <span class="color-gray margin-left">${ newdate }</span>
+                    <b>${user}</b> <span class="color-gray margin-left">${newdate}</span>
                 </div>
                 
                 <div class="message-div">        
-                    <i>${ message.value }</i>
+                    <i>${message.value}</i>
                 </div>
             </div>     `;
-            message.value = '';
+    message.value = "";
 
-        console.log('success')
-    } catch (e) {
-        console.log('Not successfully', e)
+    let objDiv = document.getElementById("messageDiv");
+    objDiv.scrollTop = objDiv.scrollHeight;
+    console.log("success");
+  } catch (e) {
+    console.log("Not successfully", e);
+  }
+}
+
+function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie != "") {
+    let cookies = document.cookie.split(";");
+    for (let i = 0; i < cookies.length; i++) {
+      let cookie = cookies[i].trim();
+      // Does this cookie string begin with the name we want?
+      if (cookie.substring(0, name.length + 1) == name + "=") {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        break;
+      }
     }
+  }
+  return cookieValue;
 }

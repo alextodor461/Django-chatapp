@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from chat.views import index, logout_view
+from chat.views import index, logout_view, newChat
 from login.views import index2
 from register.views import registerUser
 from userprofile.views import show

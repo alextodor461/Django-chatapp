@@ -69,6 +69,7 @@ header{
     height: 80vh;
     width: 80vw;
     overflow: scroll;
+    scroll-behavior: smooth;
 }
 
 .messages-div::-webkit-scrollbar {
