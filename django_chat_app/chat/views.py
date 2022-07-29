@@ -20,15 +20,19 @@ def index(request):
         serialized_obj = serializers.serialize('json', [ new_message, ])
         #We get the json with JsonResponse and we transform the Array object in an JSON with [1:-1]
         return JsonResponse(serialized_obj[1:-1], safe=False)
-    chat_messages = Message.objects.filter(chat__id=1)
-    return render(request, 'chat/index.html', {'messages': chat_messages})
+    messages = Message.objects.filter(chat__id=1)
+    chats = Chat.objects.filter(id=1)
+    print(chats)
+    print(messages)
+    return render(request, 'chat/index.html', {'messages': messages, 'chats': chats})
     
 
 def newChat(request):
     if request.method == 'POST':
         print('Received Data' + request.POST['chat_name'])
         newChat = Chat.object.create(chat_name=request.POST['chat_name'])
-        chat = Chat.object.filter(chat__id=1)
+    chat = Chat.object.filter(chat__id=1)
+
     return render(request, 'chat/index.html', {'chats': chat})
 
 
